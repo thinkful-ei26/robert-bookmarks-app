@@ -6,3 +6,7 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.headings-for-bookmarks-list {
+  display: inline-block;
+}
