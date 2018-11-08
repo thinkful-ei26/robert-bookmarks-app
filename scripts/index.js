@@ -5,5 +5,3 @@
 // $(document).ready(function() {
 
 // });
-
-// api.getItems();
