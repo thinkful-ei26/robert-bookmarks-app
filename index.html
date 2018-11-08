@@ -3,14 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>My Bookmarks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
 
 </head>
 <body>
+  <div class="main-container">
+    <h1>My Bookmarks</h1>
+    <form id="add-bookmark">
+        <label for="shopping-list-entry">Add a Bookmark</label>
+        <input type="text" name="url-entry" class="url-entry" placeholder="Bookmark Url...">
+        <button type="submit">Add</button>
+    </form>
+    <form id="filter-by-rating">
+        <label for="js-filter-by-rating">Filter by Rating</label>
+        <select class="js-filter-by-rating" name="rating">
+          <option value="one-star">One Star</option>
+          <option value="two-stars">Two Stars</option>
+          <option value="three-stars">Three Stars</option>
+          <option value="four-stars">Four Stars</option>
+          <option value="five-stars">Five Stars</option>
+        </select>
+        <button type="submit">Filter</button>
+        <!-- <div class="filter-container">
+          <input type="" id="filter-checked" class="filter-checked js-filter-checked" />
+          <label for="filter-checked">Hide Checked</label>
+        </div> -->
+        <!-- <div> -->
+          <!-- <label for="js-shopping-list-search-entry">Search:</label>
+          <input type="text" name="shopping-list-search-entry" class="js-shopping-list-search-entry" />
+        </div> -->
+    </form>
   
-  <script src="store.js"></script>
-  <script src="index.js"></script>
+  
+  
+  
+  
+  </div>
+  <script src="scripts/store.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 </html>
