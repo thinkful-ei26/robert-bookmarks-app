@@ -46,39 +46,22 @@ const store = (function() {
     //'Cancel' button.
   }
   
-  //This function will be used in order to toggle the bookmarks that should not be on the page anymore 
-  //because the dont match the filter
-  function toggleRatingFilter () {
-    this.ratingFilter = !this.ratingFilter;
-  }
-  
-  //This function will be used to prompt an error message if there are any required fields missing when attempting
-  //to add a new bookmark
-  function toggleErrorMessage () {
-    this.errorMessage = !this.errorMessage;
-  }
-  
   //Extra credit if I add in an edit feature.  It will use the function below
   // const findAndEdit = function() {
   // }
-  function returnError(error) {
-    this.error = error;
-  }
+
 
   return {
     bookmarks,
-    // expandedView: false,
     addingBookmark,
     error,
     addBookmark,
     findById,
     toggleExpandedView,
     toggleAddingBookmark,
-    toggleRatingFilter,
     findAndDelete,
-    toggleErrorMessage,
     toggleHideFiltered,
-    returnError,
+
 
     //findAndEdit,
   };

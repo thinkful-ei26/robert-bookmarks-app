@@ -1,7 +1,12 @@
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(function(){
   bookmarksPage.bindingEventListeners();
-  bookmarksPage.render();
-});
+ 
+  api.getBookmarks(function(bookmark) {
+    store.addBookmark(bookmarks); 
+  });
 
+  bookmarksPage.render();
+
+}());

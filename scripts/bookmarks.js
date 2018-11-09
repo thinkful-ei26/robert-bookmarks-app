@@ -22,7 +22,7 @@ const bookmarksPage = (function() {
           <option value="5">Five Stars</option>
         </select>
         <button type="submit" class="new-bookmark">Submit</button>
-        <input type="button" class="cancel-bookmark" value="Cancel">
+        <!-- <input type="button" class="cancel-bookmark" value="Cancel"> --!>
       </form>
       `;
     }
@@ -82,16 +82,17 @@ const bookmarksPage = (function() {
       const description = $('.description-entry').val();
       const ratingNumber = $('.js-select-rating-entry').val();
       if(bookmarkTitle === '') {
-        throw new Error('You must enter a Title');
+        throw new Error(alert('ERROR: You must enter a Title'));
       };
       if (urlLink === '') {
-        throw new Error('you must enter a url');
+        throw new Error(alert('ERROR: you must enter a url'));
       }
       $('.title-entry').val('');
       $('.url-entry').val('');
       $('.description-entry').val('');
       $('.js-select-rating-entry').val('');
       addBookmarkToBookmarksPage(bookmarkTitle, urlLink, description, ratingNumber);
+      $('.adding-bookmark-form').html('');
       render();
     });
   }
@@ -109,13 +110,6 @@ const bookmarksPage = (function() {
       store.toggleHideFiltered(filterRating);
       render();
       
-      
-      // for (let i = 0; i <store.bookmarks.length; i++) {
-      //   if ()
-      // }
-
-      
-
       //I need to hide the items that do not match the filtered star rating that was selected
       //I may need to add another property to the bookmarks objects, filteredOut: false, and change it if this happens
       
@@ -159,11 +153,8 @@ const bookmarksPage = (function() {
     $('.bookmarks-list').on('click', '.remove-bookmark-toggle', function() {
       console.log('this is the remove button');
       const id = getBookmarkIdFromElement(event.target);
-      console.log(id);
       store.findAndDelete(id);
       render();
-      //create a function that finds the closest data-item-id and deletes it
-        
     });
   }
 
