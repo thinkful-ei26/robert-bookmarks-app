@@ -1,7 +1,7 @@
 'use strict';
 
-/* global $*/
+$(document).ready(function() {
+  bookmarksPage.bindingEventListeners();
+  bookmarksPage.render();
+});
 
-// $(document).ready(function() {
-
-// });

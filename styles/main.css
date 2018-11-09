@@ -3,6 +3,16 @@
 }
 
 .main-container {
-  max-width: 600px;
+  width: 500px;
   margin: 0 auto;
+}
+
+.bookmark-title {
+  display: inline;
+  margin-right: 100px;
+  border: 2px black;
+}
+
+.js-select-rating {
+  display: block;
 }
