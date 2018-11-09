@@ -8,6 +8,8 @@ const store = (function() {
     {id: cuid(), title: 'Yahoo Sports', url: 'https://sports.yahoo.com/', desc: 'The number 2 providor of online sports coverage', rating: 4, expandedView: false, hideFiltered: false,}
   ];
 
+  const error = null;
+
   let addingBookmark = false;
   //This function will be called when we need to add a new bookmark to the bookmarks array and so 
   //it can be rendered to the page
@@ -59,12 +61,15 @@ const store = (function() {
   //Extra credit if I add in an edit feature.  It will use the function below
   // const findAndEdit = function() {
   // }
+  function returnError(error) {
+    this.error = error;
+  }
 
   return {
     bookmarks,
     // expandedView: false,
     addingBookmark,
-    errorMessage: false,
+    error,
     addBookmark,
     findById,
     toggleExpandedView,
@@ -73,6 +78,7 @@ const store = (function() {
     findAndDelete,
     toggleErrorMessage,
     toggleHideFiltered,
+    returnError,
 
     //findAndEdit,
   };

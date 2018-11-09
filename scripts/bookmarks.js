@@ -21,7 +21,7 @@ const bookmarksPage = (function() {
           <option value="4">Four Stars</option>
           <option value="5">Five Stars</option>
         </select>
-        <button type="button" class="new-bookmark">Submit</button>
+        <button type="submit" class="new-bookmark">Submit</button>
         <input type="button" class="cancel-bookmark" value="Cancel">
       </form>
       `;
@@ -81,6 +81,12 @@ const bookmarksPage = (function() {
       const urlLink = $('.url-entry').val();
       const description = $('.description-entry').val();
       const ratingNumber = $('.js-select-rating-entry').val();
+      if(bookmarkTitle === '') {
+        throw new Error('You must enter a Title');
+      };
+      if (urlLink === '') {
+        throw new Error('you must enter a url');
+      }
       $('.title-entry').val('');
       $('.url-entry').val('');
       $('.description-entry').val('');
