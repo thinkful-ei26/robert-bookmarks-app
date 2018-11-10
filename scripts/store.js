@@ -11,30 +11,31 @@ const store = (function() {
   const error = null;
 
   let addingBookmark = false;
+  
   //This function will be called when we need to add a new bookmark to the bookmarks array and so 
   //it can be rendered to the page
   function addBookmark (bookmark) {
     this.bookmarks.push(bookmark);
   }
 
-  //This function is going to be used in order to identify the id that matches the bookmarks specific id
-  function findById (id) {
-    return this.bookmarks.find(item => item.id === id);
-  }
-
   //This function will be called when the 'remove button' is selected in the expanded view of a bookmark
   function findAndDelete (id) {
     this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
   }
+  
+  //This function is going to be used in order to identify the id that matches the bookmarks specific id
+  function findById (id) {
+    return this.bookmarks.find(bookmark => bookmark.id === id);
+  }
 
   //This function toggles to an expanded view of the targeted bookmark when the title is 'clicked'
   function toggleExpandedView (id) {
-    const foundBookmark = store.bookmarks.find(bookmark => bookmark.id === id);
+    const foundBookmark = this.findById(id);
     foundBookmark.expandedView = !foundBookmark.expandedView;
   }
 
   function toggleHideFiltered (rating) {
-    const foundBookmark =  this.bookmarks = this.bookmarks.filter(bookmark => bookmark.rating >= rating);
+    const foundBookmark = this.bookmarks.filter(bookmark => bookmark.rating >= rating);
     foundBookmark.hideFiltered = !foundBookmark.hideFiltered;
   }
 
@@ -53,14 +54,14 @@ const store = (function() {
 
   return {
     bookmarks,
-    addingBookmark,
     error,
+    addingBookmark,
     addBookmark,
+    findAndDelete,
     findById,
     toggleExpandedView,
-    toggleAddingBookmark,
-    findAndDelete,
     toggleHideFiltered,
+    toggleAddingBookmark,
 
 
     //findAndEdit,

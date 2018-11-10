@@ -1,20 +1,18 @@
 'use strict';
-
 const api = (function () { 
 
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robert';
-  
-  function getBookmarks (callback) {
-    $.getJSON(`${BASE_URL}/bookmarks`, callback);
+  function getBookmarks (callback, onError) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks`,
+      method: 'GET',
+      contentType: 'application/json',
+      success: callback,
+      error: onError,
+    });
   }
 
-  //incomplete:  come back after we set up bookmarks.js
-  function createBookmark (name, callback, onError) {
-    const newBookmark = JSON.stringify( {
-      name,
-    //   title: title,
-    //   newUrl: newUrl,
-    });
+  function createBookmark (newBookmark, callback, onError) {
     $.ajax({
       url: `${BASE_URL}/bookmarks`,
       method: 'POST',
@@ -25,12 +23,12 @@ const api = (function () {
     });
   }
 
-  function deleteBookmark (id, callback) {
-
+  function deleteBookmark (id, callback, onError) {
     $.ajax({
       url: `${BASE_URL}/bookmarks/${id}`,
       method: 'DELETE',
       success: callback,
+      error: onError,
     });
   }
 
