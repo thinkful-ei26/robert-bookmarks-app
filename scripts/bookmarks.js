@@ -138,7 +138,6 @@ const bookmarksPage = (function() {
       store.toggleAddingBookmark(store.addingBookmark);
       const addingBookmarkString = generateAddingBookmarkElement(store.addingBookmark);
       $('.adding-bookmark-form').html(addingBookmarkString);
-      // $('.starting-view').html(' ');
       render();
 
       //I need to create a function that toggles addingBookmark to true

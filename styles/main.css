@@ -1,17 +1,40 @@
 * {
   box-sizing: border-box;
 }
+body {
+  margin: 0;
+}
+
+header {
+  margin: auto;
+  text-align: center;
+  /* background: rgba(117, 6, 6, 0.534); */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  border-style: solid;
+  border-width: 1px;
+  border-color:  black;
+  padding-left: 3px;
+  padding-right: 30%;
+}
+
+h2 {
+  margin: 0;
+  width: 250px; 
+}
 
 .main-container {
   width: 500px;
   margin: 0 auto;
 }
 
-.bookmark-title {
-  display: inline;
-  margin-right: 100px;
-  border: 2px black;
-}
 
 .js-select-rating {
   display: block;
