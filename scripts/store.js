@@ -35,7 +35,9 @@ const store = (function() {
   }
 
   function toggleHideFiltered (rating) {
-    const foundBookmark = this.bookmarks.filter(bookmark => bookmark.rating >= rating);
+    let foundBookmark = this.bookmarks = this.bookmarks.filter(bookmarks => bookmarks.rating >= rating);
+    // console.log(foundBookmark);
+    // console.log(store.bookmarks);
     foundBookmark.hideFiltered = !foundBookmark.hideFiltered;
   }
 

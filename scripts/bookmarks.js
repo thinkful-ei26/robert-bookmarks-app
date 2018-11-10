@@ -1,38 +1,6 @@
 'use strict';
 
 const bookmarksPage = (function() {
-
-  function generateAddingBookmarkElement () {
-    let bookmarkForm = '';
-    if (store.addingBookmark === true) {
-      bookmarkForm = `    
-      <form class="new-item">
-        <label for="title">Title</label> 
-        <input type="text" name="title" class="title-entry" placeholder="Website Name"><br>
-        <label for="url">URL</label> 
-        <input type="text" name="url" class="url-entry" placeholder="www.website.com"><br>
-        <label for="description">Description</label>
-        <input type="text" name="desc" class="description-entry" placeholder="Describe Website"><br>
-        <label for="rating">Rating</label><br>
-        <select class="js-select-rating-entry" name="rating">
-          <option selected disabled>Choose a Rating</option>
-          <option value="1">One Stars</option>
-          <option value="2">Two Stars</option>
-          <option value="3">Three Stars</option>
-          <option value="4">Four Stars</option>
-          <option value="5">Five Stars</option>
-        </select>
-        <button type="submit" class="new-bookmark">Submit</button>
-        <!-- <input type="button" class="cancel-bookmark" value="Cancel"> --!>
-      </form>
-      `;
-    }
-
-    return `${bookmarkForm}`;
-    
-  }
-
-  
   
   function addBookmarkToBookmarksPage(bookmarkTitle, urlLink, description, ratingNumber) {
     store.bookmarks.push({id: cuid(), title: bookmarkTitle, url: urlLink, desc: description, rating: ratingNumber, expandedView: false,});
@@ -41,7 +9,6 @@ const bookmarksPage = (function() {
   function handleNewBookmarkSubmit() {
     $('.main-container').on('click', '.new-bookmark', function (event) {
       event.preventDefault();
-      console.log('the submit button is working');
       const bookmarkTitle = $('.title-entry').val();
       const urlLink = $('.url-entry').val();
       const description = $('.description-entry').val();
@@ -58,6 +25,7 @@ const bookmarksPage = (function() {
       $('.js-select-rating-entry').val('');
       addBookmarkToBookmarksPage(bookmarkTitle, urlLink, description, ratingNumber);
       $('.adding-bookmark-form').html('');
+      store.toggleAddingBookmark();
       render();
     });
   }
@@ -81,13 +49,14 @@ const bookmarksPage = (function() {
       
     });
   }
-  
+
+  //Fully Functional and used in handleToggleExpandedView and handleRemoveBookmarkClicked
   function getBookmarkIdFromElement(bookmark) {
     console.log(bookmark);
     return $(bookmark).closest('.js-bookmark-element').data('bookmark-id');
   }
   
-  //THIS IS A COMPLETED AND WORKING FUNCTION!!!
+  //Fully Functional
   function handleToggleExpandedView() {
     $('.bookmarks-list').on('click', '.detailed-view-bookmarks', function(){
       const id = getBookmarkIdFromElement(event.target);
@@ -96,32 +65,63 @@ const bookmarksPage = (function() {
     }); 
   }
   
-  //THIS ADD CLICK FUNCTION IS FINISHED AND WORKING
+  //Fully Functional
   function handleAddBookmarkClick () {
-    $('#add-bookmark').click(function(event){
-      store.toggleAddingBookmark(store.addingBookmark);
+    $('.add-bookmark').click(function(event){
+      store.toggleAddingBookmark();
       render();
-      // event.preventDefault();
-      // const addingBookmarkString = generateAddingBookmarkElement(store.addingBookmark);
-      // $('.adding-bookmark-form').html(addingBookmarkString);
-      
-      //I need to create a function that toggles addingBookmark to true
-      //I also need to create an if statement in the generateBookmarkElemenet function that will... 
-      //add a new form to HTML if addingBookmark is true that allows someone to enter their new information
     });
-    
   }
   
-  //THIS IS A COMPLETED AND WORKING FUNCTION!!!
+  //Fully Functional
   function handleRemoveBookmarkClicked () {
     $('.bookmarks-list').on('click', '.remove-bookmark-toggle', function() {
-      console.log('this is the remove button');
       const id = getBookmarkIdFromElement(event.target);
       store.findAndDelete(id);
       render();
     });
   }
   
+  //Fully Functional  
+  function handleCancelButtonClick () {
+    $('.adding-bookmark-form').on('click', '.cancel-bookmark', function(event){
+      store.toggleAddingBookmark();
+      render();
+    });
+  }
+  
+  //Fully Functional
+  function generateAddingBookmarkElement () {
+    let bookmarkForm = '';
+    if (store.addingBookmark === true) {
+      bookmarkForm = `    
+      <form class="new-item">
+        <label for="title">Title</label> 
+        <input type="text" name="title" class="title-entry" placeholder="Website Name"><br>
+        <label for="url">URL</label> 
+        <input type="text" name="url" class="url-entry" placeholder="must start with https://"><br>
+        <label for="description">Description</label>
+        <input type="text" name="desc" class="description-entry" placeholder="Describe Website"><br>
+        <label for="rating">Rating</label><br>
+        <select class="js-select-rating-entry" name="rating">
+          <option selected disabled>Choose a Rating</option>
+          <option value="1">One Stars</option>
+          <option value="2">Two Stars</option>
+          <option value="3">Three Stars</option>
+          <option value="4">Four Stars</option>
+          <option value="5">Five Stars</option>
+        </select>
+        <button type="submit" class="new-bookmark">Submit</button>
+        <button type="button" class="cancel-bookmark">Cancel</button>
+      </form>
+      `;
+    }
+
+    return `${bookmarkForm}`;
+    
+  }
+
+  //Fully Functional
   const generateBookmarkElement = function(bookmark) {
     let bookmarkDetails = '';
     if (bookmark.expandedView === true) {
@@ -148,6 +148,7 @@ const bookmarksPage = (function() {
   </li>`;
   };
 
+  //Fully Functional
   function generateBookmarkElementString (bookmarksPage) {
     const bookmarks = bookmarksPage.map((bookmark) => generateBookmarkElement(bookmark));
     return bookmarks.join('');
@@ -155,13 +156,19 @@ const bookmarksPage = (function() {
 
   function render () {
     let bookmarks = [ ...store.bookmarks ];
-    // console.log('render worked');
+    console.log('render worked');
     const bookmarksString = generateBookmarkElementString(bookmarks);
     $('.js-bookmarks-list').html(bookmarksString);
+
+    const addingBookmarkString = generateAddingBookmarkElement();
+    $('.adding-bookmark-form').html(addingBookmarkString);
+
+
   }
   
   function bindingEventListeners() {
     handleAddBookmarkClick();
+    handleCancelButtonClick();
     handleRemoveBookmarkClicked();
     handleToggleRatingFilter();
     handleToggleExpandedView();
